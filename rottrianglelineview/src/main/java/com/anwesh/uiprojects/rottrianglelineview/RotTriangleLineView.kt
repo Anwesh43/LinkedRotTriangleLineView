@@ -20,7 +20,8 @@ val strokeFactor : Float = 90f
 val foreColor : Int = Color.parseColor("#E65100")
 val backColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 40
-val sizeFactor : Float = 2.9f
+val sizeFactor : Float = 2.1f
+val finalDeg : Float = 30f
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
@@ -41,12 +42,17 @@ fun Canvas.drawTriPath(size : Float, deg : Float, paint : Paint) {
 }
 
 fun Canvas.drawRotTriLine(i : Int, size : Float, sc : Float, paint : Paint) {
-    val deg : Float = 45f * sc.divideScale(i, lines)
+    val ix : Float = 1f - 2 * (i / 2)
+    val iy : Float = 1f - 2 * (i % 2)
+    val deg : Float = finalDeg * sc.divideScale(i, lines)
     save()
-    rotate(deg)
+    scale(ix, iy)
+    save()
+    rotate(-deg)
     drawLine(0f, 0f, size, 0f, paint)
     restore()
-    drawTriPath(size / 2, deg, paint)
+    drawTriPath(0.75f * size, deg, paint)
+    restore()
 }
 
 fun Canvas.drawRotTriLines(size : Float, sc : Float, paint : Paint) {

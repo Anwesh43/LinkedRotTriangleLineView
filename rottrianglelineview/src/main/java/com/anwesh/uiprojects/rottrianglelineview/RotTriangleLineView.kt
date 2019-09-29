@@ -20,3 +20,9 @@ val strokeFactor : Float = 90f
 val foreColor : Int = Color.parseColor("#E65100")
 val backColor : Int = Color.parseColor("#BDBDBD")
 val delay : Long = 40
+
+fun Int.inverse() : Float = 1f / this
+fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
+fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
+fun Float.x(deg : Float, r : Float) : Float = r * Math.cos(deg * Math.PI / 180).toFloat()
+fun Float.y(deg : Float, r : Float) : Float = r * Math.sin(deg * Math.PI / 180).toFloat()

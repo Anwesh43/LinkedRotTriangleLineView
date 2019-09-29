@@ -196,4 +196,26 @@ class RotTriangleLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : RotTriangleLineView) {
+
+        private val animator : Animator = Animator(view)
+        private val rtl : RotTriangleLine = RotTriangleLine(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            rtl.draw(canvas, paint)
+            animator.animate {
+                rtl.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            rtl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }

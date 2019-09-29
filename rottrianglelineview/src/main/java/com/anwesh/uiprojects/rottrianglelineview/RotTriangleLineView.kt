@@ -62,7 +62,7 @@ fun Canvas.drawRTLNode(i : Int, sc : Float, paint : Paint) {
     val size : Float = gap / sizeFactor
     paint.strokeWidth = Math.min(w, h) / strokeFactor
     paint.strokeCap = Paint.Cap.ROUND
-    paint.color = foreColor 
+    paint.color = foreColor
     save()
     translate(w / 2, gap * (i + 1))
     drawRotTriLines(size, sc, paint)

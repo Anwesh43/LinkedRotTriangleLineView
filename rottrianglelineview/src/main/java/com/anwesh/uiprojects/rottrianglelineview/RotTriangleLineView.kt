@@ -219,4 +219,13 @@ class RotTriangleLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : RotTriangleLineView {
+            val view : RotTriangleLineView = RotTriangleLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
